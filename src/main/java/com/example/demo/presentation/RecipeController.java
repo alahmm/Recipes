@@ -39,18 +39,6 @@ public class RecipeController {
       }
 
     }
-    @PostMapping("/actuator/shutdown")
-    public ResponseEntity<Object> TurnOffApp() {
-
-        try {
-            System.exit(0);
-            //return new ResponseEntity<>( HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-
-        return null;
-    }
     @GetMapping("/api/recipe/{iD}")
     public ResponseEntity<String> getRecipe(@PathVariable long iD) throws JsonProcessingException {
             Recipe recipe = recipeService.findRecipeById(iD);
