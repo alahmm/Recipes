@@ -21,9 +21,15 @@ public class RecipeService {
         return recipeRepository.save(toSave);
     }
     public long getHowManyElements() {
-        List<Long> listOfId = new ArrayList<>();
-       recipeRepository.findAll().forEach(s -> listOfId.add(s.getId()));
-       return listOfId.size() + 1;
+
+       return recipeRepository.count() + 1;
+    }
+    public List<Recipe> findAllRecipesByName(String name) {
+
+        return recipeRepository.findByNameContaining(name);
+    }
+    public List<Recipe> findAllRecipesByCategory(String category) {
+        return recipeRepository.findByCategoryEquals(category);
     }
     public void delete(long id) {
         recipeRepository.deleteById(id);

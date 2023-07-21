@@ -1,7 +1,6 @@
 package com.example.demo.Buisnesslayout;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -11,16 +10,17 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
+import java.util.Date;
 import java.util.List;
 @Entity
 @Table(name = "recipes")
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class Recipe {
+
     @JsonIgnore
     @Id
-    //@GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "recipe_id")
     private long id;
 
@@ -28,6 +28,14 @@ public class Recipe {
     @NonNull
     @NotBlank
     private String name;
+
+    @NotNull
+    @NonNull
+    @NotBlank
+    private String category;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private String orderDate;
 
     @NotNull
     @NonNull
@@ -43,4 +51,5 @@ public class Recipe {
     @NotNull
     @ElementCollection
     private List<String> directions;
+
 }
