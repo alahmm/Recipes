@@ -26,10 +26,10 @@ public class RecipeService {
     }
     public List<Recipe> findAllRecipesByName(String name) {
 
-        return recipeRepository.findByNameContaining(name);
+        return recipeRepository.findByNameIgnoreCaseContainsOrderByDateDesc(name);
     }
     public List<Recipe> findAllRecipesByCategory(String category) {
-        return recipeRepository.findByCategoryEquals(category);
+        return recipeRepository.findByCategoryIgnoreCaseOrderByDateDesc(category);
     }
     public void delete(long id) {
         recipeRepository.deleteById(id);

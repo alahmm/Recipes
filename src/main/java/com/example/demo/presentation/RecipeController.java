@@ -45,7 +45,7 @@ public class RecipeController {
           id = recipeService.getHowManyElements();
 
           Recipe createdRecipe = recipeService.save(new Recipe(id,
-                  recipeNew.getName(), recipeNew.getCategory(), getTime(), recipeNew.getDescription(), recipeNew.getIngredients(),
+                  recipeNew.getName(), recipeNew.getCategory(), LocalDateTime.now(), recipeNew.getDescription(), recipeNew.getIngredients(),
                   recipeNew.getDirections()));
           idNew.setId(id);
           return new ResponseEntity<>(objectMapper.writerWithDefaultPrettyPrinter().
@@ -82,7 +82,7 @@ public class RecipeController {
             recipe.setCategory(newRecipe.getCategory());
             recipe.setIngredients(newRecipe.getIngredients());
             recipe.setDirections(newRecipe.getDirections());
-            recipe.setOrderDate(getTime());
+            //recipe.setOrderDate(getTime());
             recipeService.save(recipe);
             return new ResponseEntity<>( HttpStatus.NO_CONTENT);
         }
@@ -101,7 +101,7 @@ public class RecipeController {
             String value = name.get();
             recipes = recipeService.findAllRecipesByName(value);
         } else {
-            recipes = recipeService.findAllRecipesByCategory(String.valueOf(category));
+            recipes = recipeService.findAllRecipesByCategory(category.get());
         }
         return new ResponseEntity<>(objectMapper.writerWithDefaultPrettyPrinter().
                     writeValueAsString(recipes), HttpStatus.OK);

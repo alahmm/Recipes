@@ -1,5 +1,6 @@
 package com.example.demo.Buisnesslayout;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -9,6 +10,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.util.Date;
 import java.util.List;
@@ -34,8 +36,10 @@ public class Recipe {
     @NotBlank
     private String category;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private String orderDate;
+    @UpdateTimestamp
+    @Basic
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    private java.time.LocalDateTime date;
 
     @NotNull
     @NonNull
