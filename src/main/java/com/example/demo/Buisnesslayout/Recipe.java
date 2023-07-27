@@ -15,11 +15,13 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-@Entity
+@Entity(name = "reciipes")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "newRecipes")
 public class Recipe {
+    //@GeneratedValue(strategy = GenerationType.AUTO)
     @JsonIgnore
     @Id
     private long id;
@@ -28,7 +30,6 @@ public class Recipe {
     @NonNull
     @NotBlank
     private String name;
-
 
     @NotNull
     @NonNull
@@ -63,4 +64,18 @@ public class Recipe {
     @JsonIgnore
     private String author;
 
+/*    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private MyUser myUser;*/
+
+    public Recipe(@NotNull @NonNull String name, @NotNull @NonNull String category, LocalDateTime date, @NotNull @NonNull String description, @NotNull @NotNull @Size(min = 1) String[] ingredients, @NotNull @NotNull @Size(min = 1) String[] directions, String author) {
+        this.name = name;
+        this.category = category;
+        this.date = date;
+        this.description = description;
+        this.ingredients = ingredients;
+        this.directions = directions;
+        this.author = author;
+    }
 }

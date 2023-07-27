@@ -23,7 +23,7 @@ public class userService {
     public void save(MyUser toSave) {
         userRepository.save(toSave);
     }
-    public long getHowManyElements() {
+    public long getHowManyElementsUsers() {
 
         return userRepository.count() + 1;
     }

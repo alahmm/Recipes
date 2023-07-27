@@ -1,5 +1,7 @@
 package com.example.demo;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -8,6 +10,7 @@ import org.springframework.security.crypto.encrypt.BytesEncryptor;
 import org.springframework.security.crypto.encrypt.Encryptors;
 import org.springframework.security.crypto.encrypt.TextEncryptor;
 import org.springframework.security.crypto.keygen.KeyGenerators;
+import org.springframework.stereotype.Component;
 
 
 @SpringBootApplication
@@ -17,6 +20,7 @@ public class DemoApplication //implements CommandLineRunner {
 
 		SpringApplication.run(DemoApplication.class, args);
 	}
+
 //for encryption
 /*	@Bean
 	public BytesEncryptor aesBytesEncryptor() {

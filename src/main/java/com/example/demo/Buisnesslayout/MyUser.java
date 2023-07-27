@@ -19,6 +19,7 @@ import java.util.List;
 public class MyUser{
 
     @Id
+    //@GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     @Pattern(regexp = ".+@.+\\..+")
@@ -27,5 +28,8 @@ public class MyUser{
     @NotBlank
     @Size(min = 8)
     private String password;
+
+/*    @OneToMany(mappedBy = "MyUser", cascade = CascadeType.ALL)
+    private List<Recipe> recipes = new ArrayList<>();*/
 
 }

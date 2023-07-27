@@ -19,6 +19,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -49,7 +50,7 @@ public class RecipeController {
     public ResponseEntity<HttpStatus> register(@Valid @RequestBody MyUser user)  {
         MyUser user1 = userService.findUserByEmail(user.getEmail());
         if (user1 == null) {
-            user_id= userService.getHowManyElements();
+            user_id = userService.getHowManyElementsUsers();
             user.setPassword(encoder.encode(user.getPassword()));
             user.setId(user_id);
             userService.save(user);
@@ -58,15 +59,15 @@ public class RecipeController {
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
     @PostMapping("/api/recipe/new")
-    public ResponseEntity<String> RecipeSetter(@Valid @RequestBody Recipe recipeNew, @AuthenticationPrincipal UserDetails details) throws JsonProcessingException {
+    public ResponseEntity<String> RecipeSetter(@Valid @RequestBody Recipe recipeNew,
+                                               @AuthenticationPrincipal UserDetails details) throws JsonProcessingException {
         id = recipeService.getHowManyElements();
         Recipe recipe = new Recipe(id,
                 recipeNew.getName(), recipeNew.getCategory(),
                 LocalDateTime.now(), recipeNew.getDescription(), recipeNew.getIngredients(),
                 recipeNew.getDirections(), details.getUsername());
         recipeService.save(recipe);
-
-        idNew.setId(recipe.getId());
+        idNew.setId(id);
         return new ResponseEntity<>(objectMapper.writerWithDefaultPrettyPrinter().
                 writeValueAsString(idNew), HttpStatus.OK);
 
