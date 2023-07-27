@@ -31,10 +31,9 @@ public class RecipeService {
     public List<Recipe> findAllRecipesByCategory(String category) {
         return recipeRepository.findByCategoryIgnoreCaseOrderByDateDesc(category);
     }
-    public void delete(long id) {
-        recipeRepository.deleteById(id);
-    }
-    public void deleteAll() {
+    public void delete(Recipe recipe) {
+        recipeRepository.delete(recipe);
+    }    public void deleteAll() {
         recipeRepository.deleteAll();
     }
 
