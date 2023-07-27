@@ -6,30 +6,29 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import lombok.*;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.LinkedHashSet;
 import java.util.List;
-@Entity
-@Table(name = "recipes")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class Recipe {
+import java.util.Set;
 
+@Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class Recipe {
     @JsonIgnore
     @Id
-    @Column(name = "recipe_id")
     private long id;
 
     @NotNull
     @NonNull
     @NotBlank
     private String name;
+
 
     @NotNull
     @NonNull
@@ -46,14 +45,22 @@ public class Recipe {
     @NotBlank
     private String description;
 
-    @Size(min = 1)
-    @NotNull
+    @OrderColumn
     @ElementCollection
-    private List<String> ingredients;
+    @NotNull
+    @NotNull
+    @Size(min = 1)
+    private String[] ingredients;
 
-    @Size(min = 1)
-    @NotNull
+    @OrderColumn
     @ElementCollection
-    private List<String> directions;
+    @NotNull
+    @NotNull
+    @Size(min = 1)
+    private String[] directions;
+
+
+    @JsonIgnore
+    private String author;
 
 }
